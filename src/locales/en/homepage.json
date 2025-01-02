@@ -1,4 +1,6 @@
 {
-    "welcome": "Welcome!",
-    "description": "This is the homepage."
-  }
+  "welcome": "Welcome!",
+  "description": "This is the homepage.",
+  "additionalText": "Join us to explore amazing features and manage your tasks efficiently.",
+  "loginButton": "Go to Login"
+}

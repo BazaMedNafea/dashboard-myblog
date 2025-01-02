@@ -1,8 +1,19 @@
 {
-    "dashboardTitle": "لوحة التحكم",
-    "createNewPost": "إنشاء منشور جديد",
-    "creatingPost": "جارٍ إنشاء المنشور...",
-    "recentPosts": "المنشورات الأخيرة",
-    "loading": "جارٍ التحميل",
-    "noPosts": "لا توجد منشورات."
-  }
+  "dashboardTitle": "لوحة التحكم",
+  "createNewPost": "إنشاء منشور جديد",
+  "creatingPost": "جاري إنشاء المنشور...",
+  "recentPosts": "المنشورات الأخيرة",
+  "loading": "جاري التحميل",
+  "noPosts": "لا توجد منشورات.",
+  "newPost": "منشور جديد",
+  "postTitle": "عنوان المنشور",
+  "postContent": "محتوى المنشور",
+  "publish": "نشر",
+  "publishing": "جاري النشر...",
+  "cancel": "إلغاء",
+  "deletePost": "حذف المنشور",
+  "deleteConfirmationMessage": "هل أنت متأكد أنك تريد حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.",
+  "confirm": "تأكيد",
+  "categories": "الفئات",
+  "tags": "العلامات"
+}

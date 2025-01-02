@@ -2,7 +2,7 @@
 import api from "./api";
 
 export const getUserInfo = async () => {
-  const response = await api.get("/myuser");
+  const response = await api.get("/user/my/info");
   return response.data;
 };
 
@@ -11,6 +11,6 @@ export const updateUserInfo = async (data: {
   telephone?: string;
   email?: string;
 }) => {
-  const response = await api.put("/myuser/update", data);
+  const response = await api.put("/user/my/update", data);
   return response.data;
 };

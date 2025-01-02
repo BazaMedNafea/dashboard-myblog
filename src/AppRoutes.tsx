@@ -1,9 +1,9 @@
-// src/AppRoutes.tsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Dashboard from "./pages/dashboard/Dashboard";
+import CreatePost from "./pages/dashboard/CreatePost"; // Import the new component
 import Layout from "./layouts/Layout";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
@@ -41,6 +41,16 @@ const AppRoutes = () => {
             <Layout>
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            </Layout>
+          }
+        />
+        <Route
+          path="/dashboard/create-post"
+          element={
+            <Layout>
+              <ProtectedRoute>
+                <CreatePost />
               </ProtectedRoute>
             </Layout>
           }
