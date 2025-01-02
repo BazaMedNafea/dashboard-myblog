@@ -1,21 +1,31 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { login } from "../../services/auth"; // Import the login API service
+import { login } from "../../services/auth";
+import { useErrorHandler } from "../../utils/ErrorHandler";
 
 const Login = () => {
   const { t } = useTranslation("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false); // Add loading state
+  const { handleError } = useErrorHandler();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+
     try {
       const response = await login({ email, password });
       console.log("Login successful:", response);
       // Redirect to dashboard or homepage
     } catch (err) {
-      setError(t("loginError"));
+      // Use the error handler with the "login" context
+      const errorMessage = handleError(err, "login");
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,9 +58,33 @@ const Login = () => {
         </div>
         <button
           type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center justify-center"
+          disabled={loading} // Disable the button when loading
         >
-          {t("submit")}
+          {loading ? (
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+          ) : (
+            t("submit")
+          )}
         </button>
       </form>
       <p className="mt-4 text-center">

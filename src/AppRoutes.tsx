@@ -22,7 +22,7 @@ const AppRoutes = () => {
         <Route
           path="/login"
           element={
-            <Layout hideNavbar>
+            <Layout>
               <Login />
             </Layout>
           }
@@ -30,7 +30,7 @@ const AppRoutes = () => {
         <Route
           path="/register"
           element={
-            <Layout hideNavbar>
+            <Layout>
               <Register />
             </Layout>
           }
