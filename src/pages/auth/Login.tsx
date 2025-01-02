@@ -1,14 +1,17 @@
+// Login.tsx
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { login } from "../../services/auth";
 import { useErrorHandler } from "../../utils/ErrorHandler";
+import { useNavigate } from "react-router-dom"; // Add this
 
 const Login = () => {
   const { t } = useTranslation("login");
+  const navigate = useNavigate(); // Add this
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
   const { handleError } = useErrorHandler();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,9 +22,8 @@ const Login = () => {
     try {
       const response = await login({ email, password });
       console.log("Login successful:", response);
-      // Redirect to dashboard or homepage
+      navigate("/dashboard"); // Add this
     } catch (err) {
-      // Use the error handler with the "login" context
       const errorMessage = handleError(err, "login");
       setError(errorMessage);
     } finally {

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../services/auth";
 import SideMenu from "./SideMenu";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation("common");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,12 +17,19 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <nav className="bg-blue-500 dark:bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo and Hamburger Menu */}
         <div className="flex items-center">
-          {/* Hamburger Menu (Mobile) */}
           <button
             onClick={toggleMenu}
             className="text-white focus:outline-none"
@@ -30,7 +39,6 @@ const Navbar = () => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 strokeLinecap="round"
@@ -40,45 +48,45 @@ const Navbar = () => {
               ></path>
             </svg>
           </button>
-
-          {/* Add conditional spacing based on language */}
-          <div
-            className={
-              i18n.language === "ar" ? "mr-4" : "ml-4" // Use mr-4 for Arabic, ml-4 for English
-            }
-          >
-            {/* Logo or Brand Name */}
+          <div className={i18n.language === "ar" ? "mr-4" : "ml-4"}>
             <div className="text-white text-xl font-bold">My App</div>
           </div>
         </div>
 
-        {/* Navigation Links (Desktop) */}
-        <ul
-          className={`hidden lg:flex ${
-            i18n.language === "ar" ? "space-x-reverse" : ""
-          } space-x-4`}
-        >
-          <li>
-            <Link
-              to="/"
-              className="text-white hover:text-gray-200 dark:hover:text-gray-400"
-            >
-              {t("home")}
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/about"
-              className="text-white hover:text-gray-200 dark:hover:text-gray-400"
-            >
-              {t("about")}
-            </Link>
-          </li>
-        </ul>
+        <div className="flex items-center">
+          <ul
+            className={`hidden lg:flex items-center ${
+              i18n.language === "ar" ? "space-x-reverse" : ""
+            } space-x-4`}
+          >
+            <li>
+              <Link
+                to="/"
+                className="text-white hover:text-gray-200 dark:hover:text-gray-400"
+              >
+                {t("home")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                className="text-white hover:text-gray-200 dark:hover:text-gray-400"
+              >
+                {t("about")}
+              </Link>
+            </li>
+          </ul>
+
+          <button
+            onClick={handleLogout}
+            className="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md ml-4"
+          >
+            {t("logout")}
+          </button>
+        </div>
       </div>
 
-      {/* Side Menu (Mobile) */}
-      <SideMenu isOpen={isMenuOpen} onClose={closeMenu} />
+      <SideMenu isOpen={isMenuOpen} onClose={closeMenu} logout={handleLogout} />
     </nav>
   );
 };

@@ -6,6 +6,7 @@ import LanguageSwitcher from "./LanguageSwitcher"; // Import the LanguageSwitche
 interface SideMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  logout: () => void;
 }
 
 const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {

@@ -1,16 +1,19 @@
+// Register.tsx
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { register } from "../../services/auth"; // Import the register API service
-import { useErrorHandler } from "../../utils/ErrorHandler"; // Import the ErrorHandler
+import { register } from "../../services/auth";
+import { useErrorHandler } from "../../utils/ErrorHandler";
+import { useNavigate } from "react-router-dom"; // Add this
 
 const Register = () => {
   const { t } = useTranslation("register");
+  const navigate = useNavigate(); // Add this
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false); // Add loading state
-  const { handleError } = useErrorHandler(); // Use the error handler hook
+  const [loading, setLoading] = useState(false);
+  const { handleError } = useErrorHandler();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,9 +23,8 @@ const Register = () => {
     try {
       const response = await register({ email, password, fullName: name });
       console.log("Registration successful:", response);
-      // Redirect to login or dashboard
+      navigate("/dashboard"); // Add this
     } catch (err) {
-      // Use the error handler with the "register" context
       const errorMessage = handleError(err, "register");
       setError(errorMessage);
     } finally {

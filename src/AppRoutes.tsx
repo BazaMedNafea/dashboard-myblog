@@ -1,9 +1,11 @@
+// src/AppRoutes.tsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homepage/Homepage";
-
-import Layout from "./layouts/Layout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Layout from "./layouts/Layout";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 const AppRoutes = () => {
   return (
@@ -13,8 +15,6 @@ const AppRoutes = () => {
           path="/"
           element={
             <Layout>
-              {" "}
-              {/* Hide Navbar on the homepage */}
               <Homepage />
             </Layout>
           }
@@ -22,7 +22,7 @@ const AppRoutes = () => {
         <Route
           path="/login"
           element={
-            <Layout>
+            <Layout hideNavbar>
               <Login />
             </Layout>
           }
@@ -30,8 +30,18 @@ const AppRoutes = () => {
         <Route
           path="/register"
           element={
-            <Layout>
+            <Layout hideNavbar>
               <Register />
+            </Layout>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <Layout>
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
             </Layout>
           }
         />
