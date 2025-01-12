@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   FaBold,
   FaItalic,
@@ -31,20 +31,19 @@ const RichTextEditor: React.FC<EditorProps> = ({
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
 
+  // Update the editor's content only when the `value` prop changes externally
+  useEffect(() => {
+    if (editorRef.current && editorRef.current.innerHTML !== value) {
+      editorRef.current.innerHTML = value;
+    }
+  }, [value]);
+
   // Focus the editor and execute a command
   const execCommand = (command: string, value?: string) => {
     if (editorRef.current) {
       editorRef.current.focus(); // Ensure the editor is focused
       document.execCommand(command, false, value || ""); // Execute the command
       updateToolbarState(); // Update the toolbar state
-      updateContent(); // Update the content
-    }
-  };
-
-  // Update the content in the parent component
-  const updateContent = () => {
-    if (editorRef.current) {
-      onChange(editorRef.current.innerHTML);
     }
   };
 
@@ -73,7 +72,10 @@ const RichTextEditor: React.FC<EditorProps> = ({
 
   // Handle editor input
   const handleInput = () => {
-    updateContent();
+    if (editorRef.current) {
+      const newValue = editorRef.current.innerHTML;
+      onChange(newValue); // Call the onChange function with the new value
+    }
     updateToolbarState();
   };
 
@@ -249,7 +251,6 @@ const RichTextEditor: React.FC<EditorProps> = ({
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
-        dangerouslySetInnerHTML={{ __html: value }}
         data-placeholder={placeholder}
       />
 

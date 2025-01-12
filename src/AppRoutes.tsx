@@ -3,7 +3,8 @@ import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Dashboard from "./pages/dashboard/Dashboard";
-import CreatePost from "./pages/dashboard/CreatePost"; // Import the new component
+import CreatePost from "./pages/dashboard/CreatePost";
+import EditPost from "./pages/dashboard/EditPost"; // Import the new component
 import Layout from "./layouts/Layout";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
@@ -51,6 +52,16 @@ const AppRoutes = () => {
             <Layout>
               <ProtectedRoute>
                 <CreatePost />
+              </ProtectedRoute>
+            </Layout>
+          }
+        />
+        <Route
+          path="/dashboard/edit-post/:postId"
+          element={
+            <Layout>
+              <ProtectedRoute>
+                <EditPost />
               </ProtectedRoute>
             </Layout>
           }

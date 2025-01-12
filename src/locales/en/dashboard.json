@@ -17,5 +17,10 @@
   "categories": "Categories",
   "tags": "Tags",
   "addCategory": "Add Category",
-  "addTag": "Add Tag"
+  "addTag": "Add Tag",
+  "managePosts": "Manage and organize your blog posts",
+  "createFirstPost": "Start by creating your first post",
+  "editPost": "Edit Post",
+  "updating": "Updating...",
+  "update": "Update"
 }

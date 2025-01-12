@@ -40,3 +40,9 @@ export const getUserPosts = async () => {
   const response = await api.get("/post/my/get");
   return response.data;
 };
+
+// Get a post by ID
+export const getPostById = async (postId: number) => {
+  const response = await api.get(`/post/my/${postId}`);
+  return response.data;
+};
