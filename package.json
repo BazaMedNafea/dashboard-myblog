@@ -17,6 +17,7 @@
     "react-i18next": "^15.4.0",
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.1",
+    "styled-components": "^6.1.14",
     "tailwindcss-rtl": "^0.9.0"
   },
   "devDependencies": {

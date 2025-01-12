@@ -79,7 +79,9 @@ const Navbar = () => {
 
           <button
             onClick={handleLogout}
-            className="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md ml-4"
+            className={`text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md ${
+              i18n.language === "ar" ? "mr-4" : "ml-4"
+            }`}
           >
             {t("logout")}
           </button>
